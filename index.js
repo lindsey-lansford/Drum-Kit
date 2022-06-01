@@ -7,14 +7,25 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function () {
         var buttonInnerHTML = this.innerHTML;
 
-        makeSound(buttonInnerHTML)
+        makeSound(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
     });
 }
 
-//detecting keyboard press
+// detecting keyboard press
 document.addEventListener("keydown", function (event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
  })
+
+//document is the object
+//addEventListner is a HIGH ORDER FUNCTION.    
+//respondToKey is the CALLBACK FUNCTION
+// document.addEventListener("keydown", respondToKey(event));
+// function respondToKey(event) {
+//         console.log("keys pressed.")
+//     }
+
 
 function makeSound(key) {
     
@@ -68,27 +79,16 @@ function makeSound(key) {
     }
 }
 
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey)
+    activeButton.classList.add("pressed");
+    setTimeout(function () {
+        activeButton.classList.remove("pressed");
+    }, 100);
+}
 
-// Constructor Function
-// function HouseKeeper(skills, languages, age, name) {
-//     this.skills = skills;
-//     this.languages = languages;
-//     this.age = age;
-//     this.name = name;
-//     this.clean = function() {
-//         alert("Cleaning in progress...");
-//         makeBeds();
-//         cleanBathroom();
-//     }
-// }
 
-// // // Initialize Object
-// var houseKeeper1 = new HouseKeeper(["deep clean", "bedsheets", "ironing"], "french", 33, "nancy");
-// var houseKeeper2 = new HouseKeeper(["bathroom", "beds"], "english", 27, "susan");
-// var houseKeeper3 = new HouseKeeper(["folding", "beds", "mopping"], "spanish", 31, "anne");
 
-// //calling the 'clean' function
-// houseKeeper3.clean();
 
 
 
